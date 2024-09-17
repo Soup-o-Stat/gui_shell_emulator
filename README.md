@@ -1,5 +1,5 @@
 # GUI Shell Emulator
-This GUI Shell Emulator is written in python using the pygame library. To run the emulator, run Shell_Emulator.exe or start.bat. This program can also work from rar archives (you don't have to unpack it)
+This GUI Shell Emulator is written on python using the pygame library. To run the emulator, run Shell_Emulator.exe or start.bat. This program can also work from rar archives (you don't have to unpack it)
 
 ## py files
 
