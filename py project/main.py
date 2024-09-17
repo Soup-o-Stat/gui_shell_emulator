@@ -8,7 +8,7 @@ from PIL import Image
 
 pygame.init()
 
-ver="0.0.2"
+ver="0.0.3"
 random_text={0: "",
              1: "Also try Mondealy Mod Installer!",
              2: "I used pygame!",
@@ -21,6 +21,7 @@ random_text_num=random.randint(0, 6)
 
 
 screen=pygame.display.set_mode((640, 480))
+pygame.display.set_caption(f"Shell Emulator {ver} {random_text[random_text_num]}")
 
 white=(255, 255, 255)
 black=(0,0,0)
