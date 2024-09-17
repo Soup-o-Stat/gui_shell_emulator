@@ -12,8 +12,8 @@ history_step=0
 class InputBox:
     def __init__(self, x, y, w, h, font_size):
         self.rect = pygame.Rect(x, y, w, h)
-        self.color_inactive = (180, 180, 180)
-        self.color_active = (0, 0, 0)
+        self.color_inactive = (100, 100, 100)
+        self.color_active = (255, 255, 255)
         self.color = self.color_inactive
         self.active = False
         self.text = ''

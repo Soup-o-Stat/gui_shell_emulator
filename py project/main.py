@@ -8,7 +8,7 @@ from PIL import Image
 
 pygame.init()
 
-ver="0.0.3"
+ver="0.0.4"
 random_text={0: "",
              1: "Also try Mondealy Mod Installer!",
              2: "I used pygame!",
@@ -23,10 +23,8 @@ random_text_num=random.randint(0, 6)
 screen=pygame.display.set_mode((640, 480))
 pygame.display.set_caption(f"Shell Emulator {ver} {random_text[random_text_num]}")
 
-white=(255, 255, 255)
-black=(0,0,0)
+bg_col=(9, 12, 40)
 gray=(200, 200, 200)
-
 
 def kill_this_fucking_program():
     pygame.quit()
@@ -45,7 +43,7 @@ def main():
 
             inputbox.handle_event(event)
 
-        screen.fill((white))
+        screen.fill((bg_col))
         console_output.draw(screen)
         inputbox.draw(screen)
 
