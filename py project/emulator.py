@@ -62,9 +62,10 @@ def error_command(command):
     console.text_list.append(f"Command {command} is not exist. Type 'help' for command list")
 
 def hello_message():
-    console.text_list.append("=======================================================")
+    console.text_list.append("==========================================================")
     console.text_list.append(f"Hello {getpass.getuser()}! Type help for command list!")
-    console.text_list.append("=======================================================")
+    console.text_list.append("==========================================================")
+    console.text_list.append("")
 
 class Emulator():
     def __init__(self):

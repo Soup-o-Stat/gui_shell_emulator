@@ -7,7 +7,7 @@ import os
 
 pygame.init()
 
-ver="0.0.6"
+ver="0.0.7"
 random_text={0: "",
              1: "Also try Mondealy Mod Installer!",
              2: "I used pygame!",
