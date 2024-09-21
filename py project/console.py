@@ -13,17 +13,6 @@ class ConsoleOutput:
 
     def draw(self, screen):
         global text_animation_y, text_list, text_animation_step
-
-        if text_animation_step==1:
-            if text_animation_y<25:
-                text_animation_y+=0.2
-                if text_animation_y>=25:
-                    text_animation_step=0
-        if text_animation_step==0:
-            if text_animation_y>15:
-                text_animation_y-=0.2
-                if text_animation_y<=15:
-                    text_animation_step=1
         pygame.draw.rect(screen, (255, 255, 255), self.rect, 2)
 
         if len(text_list)>18:

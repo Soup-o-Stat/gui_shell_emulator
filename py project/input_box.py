@@ -8,7 +8,6 @@ emulator_obj=emulator.Emulator
 input_history=[]
 history_step=0
 
-
 class InputBox:
     def __init__(self, x, y, w, h, font_size):
         self.rect = pygame.Rect(x, y, w, h)
@@ -46,6 +45,8 @@ class InputBox:
                         self.text=str(input_history[len(input_history)-history_step])
                     else:
                         pass
+                elif event.key==pygame.K_DELETE:
+                    self.text=''
                 elif event.key==pygame.K_DOWN:
                     if (len(input_history)-history_step)<len(input_history)-1:
                         history_step -= 1
