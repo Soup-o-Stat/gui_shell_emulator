@@ -5,9 +5,11 @@ import console
 import random
 import os
 
+#инициализация пугейма
 pygame.init()
 
-ver="0.0.7"
+#всякая чушь чисто для себя (ну или поржать)
+ver="0.0.8"
 random_text={0: "",
              1: "Also try Mondealy Mod Installer!",
              2: "I used pygame!",
@@ -18,16 +20,20 @@ random_text={0: "",
 
 random_text_num=random.randint(0, 6)
 
+#инициализация окна
 screen=pygame.display.set_mode((640, 480))
 pygame.display.set_caption(f"Shell Emulator {ver} {random_text[random_text_num]}")
 
+#цвета
 bg_col=(9, 12, 40)
 gray=(200, 200, 200)
 
+#хуй его знает, зачем я сделал для выхода отдельную функцию
 def kill_this_fucking_program():
     pygame.quit()
     sys.exit()
 
+#основная функция программы, бла бла бла
 def main():
     clock = pygame.time.Clock()
     console_output = console.ConsoleOutput(25, 18, 90, 600, 375)

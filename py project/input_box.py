@@ -2,13 +2,16 @@ import pygame
 import console
 import emulator
 
+#создание объектов классов
 console_output=console.ConsoleOutput
 emulator_obj=emulator.Emulator
 
 input_history=[]
 history_step=0
 
+#класс поля для ввода команд
 class InputBox:
+    #спавн объекта с параметрами, база
     def __init__(self, x, y, w, h, font_size):
         self.rect = pygame.Rect(x, y, w, h)
         self.color_inactive = (100, 100, 100)
@@ -20,6 +23,7 @@ class InputBox:
         self.txt_surface = self.font.render(self.text, True, self.color)
         self.min_w = w
 
+    #эта штука отвечает за управление и ввод
     def handle_event(self, event):
         global history_step
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -58,6 +62,7 @@ class InputBox:
 
         self.txt_surface = self.font.render(self.text, True, self.color)
 
+    #рисуем инпут бокс на экран
     def draw(self, screen):
         screen.blit(self.txt_surface, (self.rect.x + 5, self.rect.y + 5))
         pygame.draw.rect(screen, self.color, self.rect, 2, border_radius=10)

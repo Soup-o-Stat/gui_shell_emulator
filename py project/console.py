@@ -5,12 +5,15 @@ text_list=[]
 text_animation_step=1
 text_animation_y=20
 
+#консолька
 class ConsoleOutput:
+    #инит
     def __init__(self, font_size, x, y, w, h):
         self.rect = pygame.Rect(x, y, w, h)
         self.font = pygame.font.Font(None, font_size)
         self.line_height = self.font.get_height()
 
+    #рисуем
     def draw(self, screen):
         global text_animation_y, text_list, text_animation_step
         pygame.draw.rect(screen, (255, 255, 255), self.rect, 2)
