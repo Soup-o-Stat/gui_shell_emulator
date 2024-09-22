@@ -9,7 +9,7 @@ import os
 pygame.init()
 
 #всякая чушь чисто для себя (ну или поржать)
-ver="0.0.8"
+ver="1.0.0"
 random_text={0: "",
              1: "Also try Mondealy Mod Installer!",
              2: "I used pygame!",
@@ -21,12 +21,15 @@ random_text={0: "",
 random_text_num=random.randint(0, 6)
 
 #инициализация окна
-screen=pygame.display.set_mode((640, 480))
+screen=pygame.display.set_mode((640, 680))
 pygame.display.set_caption(f"Shell Emulator {ver} {random_text[random_text_num]}")
+console_layer = pygame.Surface((640, 680))
 
 #цвета
 bg_col=(9, 12, 40)
 gray=(200, 200, 200)
+
+penis=0
 
 #хуй его знает, зачем я сделал для выхода отдельную функцию
 def kill_this_fucking_program():
@@ -35,23 +38,35 @@ def kill_this_fucking_program():
 
 #основная функция программы, бла бла бла
 def main():
+    global penis
     clock = pygame.time.Clock()
-    console_output = console.ConsoleOutput(25, 18, 90, 600, 375)
+    screen.blit(console_layer, (0, 0 + penis))
+    console_output = console.ConsoleOutput(25, 18, 90, 600, 575)
     inputbox = input_box.InputBox(10, 50, 615, 30, 25)
+
     run = True
 
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run=False
+            elif event.type==pygame.MOUSEBUTTONDOWN:
+                if event.button==5:
+                    penis-=25
+                if event.button==4:
+                    if penis!=0:
+                        penis+=25
+
 
             inputbox.handle_event(event)
 
+
         screen.fill(bg_col)
-        console_output.draw(screen)
         inputbox.draw(screen)
+        console_output.draw(screen)
         pygame.display.flip()
         clock.tick(60)
+
 
     kill_this_fucking_program()
 

@@ -18,7 +18,7 @@ class ConsoleOutput:
         global text_animation_y, text_list, text_animation_step
         pygame.draw.rect(screen, (255, 255, 255), self.rect, 2)
 
-        if len(text_list)>18:
+        if len(text_list)>28:
             text_list.pop(0)
 
         for i in range(len(text_list)):
