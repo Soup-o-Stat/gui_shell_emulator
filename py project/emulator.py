@@ -1,4 +1,4 @@
-#Импорт всякого говна
+#Импорт всякой фигни
 import time
 import pygame
 import console
@@ -19,6 +19,7 @@ start_dir = '.'
 username = getpass.getuser()
 arch_dir = './arch_dir.tar'
 
+#если нету флагов
 try:
     script, one, two, three, four=sys.argv
     print("Этот скрипт называется: ", script)
@@ -45,6 +46,7 @@ def read_ini_file(filename):
                 arch_dir = value
         print()
 
+#попытка загрузить данные из ини
 try:
     ini_file_path = 'config.ini'
     read_ini_file(ini_file_path)
@@ -85,7 +87,7 @@ def open_game():
 def clear():
     console.text_list.clear()
 
-
+#работа с дубликатами строк в тхт файле
 def uniq(data):
     data_sorted = False
     for i in range(len(data)):
@@ -145,6 +147,7 @@ def uniq(data):
         os.startfile(param3)
         console.text_list.append(f"Done! Trying to open {param3}")
 
+#для работы с зип файлами
 def list_files_in_directory(start_path, indent='', zip_file=None):
     if zip_file:
         with zipfile.ZipFile(zip_file, 'r') as z:
@@ -160,6 +163,7 @@ def list_files_in_directory(start_path, indent='', zip_file=None):
                 console.text_list.append(f"{indent}-> {item}")
                 list_files_in_directory(path, indent + '    ')
 
+#переход на другую директорию
 def cd(data):
     global start_dir
     for i in range(len(data)):
@@ -179,6 +183,7 @@ def cd(data):
     except NotADirectoryError:
         pass
 
+#иерархия файлов
 def tree(data):
     option_found = False
     for i in range(len(data)):
@@ -229,6 +234,7 @@ def tree(data):
             files_list.clear()
             list_files_in_directory(start_dir)
 
+#вывод файлов в данной директории
 def ls(data, find_bool):
     global start_dir
     if find_bool:
@@ -254,15 +260,18 @@ def ls(data, find_bool):
         for i in range(len(files_list)):
             console.text_list.append(files_list[i])
 
+#типо эксепт
 def error_command(command):
     console.text_list.append(f"Command {command} does not exist. Type 'help' for command list")
 
+#приветственное сообщение
 def hello_message():
     console.text_list.append("==========================================================")
     console.text_list.append(f"Hello {username}! Type help for command list!")
     console.text_list.append("==========================================================")
     console.text_list.append("")
 
+#тесты
 def start_test():
     clear()
     console.text_list.append("Let's start tests")
@@ -296,6 +305,7 @@ def start_test():
     Emulator.read_command(Emulator, "tree -d")
     Emulator.read_command(Emulator, "tree -f")
 
+#класс эмулятора
 class Emulator():
     def __init__(self):
         pass
@@ -334,6 +344,7 @@ class Emulator():
         input_box.input_history.append(command)
         input_box.history_step = 0
 
+#подгрузка флажков
 try:
     if one=="ls":
         ls(data=start_dir, find_bool=False)
