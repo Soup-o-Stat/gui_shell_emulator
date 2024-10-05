@@ -19,12 +19,15 @@ start_dir = '.'
 username = getpass.getuser()
 arch_dir = './arch_dir.tar'
 
-script, one, two, three, four=sys.argv
-print("Этот скрипт называется: ", script)
-print(one)
-print(two)
-print(three)
-print(four)
+try:
+    script, one, two, three, four=sys.argv
+    print("Этот скрипт называется: ", script)
+    print(one)
+    print(two)
+    print(three)
+    print(four)
+except:
+    pass
 
 #чтение ини файла
 def read_ini_file(filename):
@@ -189,24 +192,19 @@ def tree(data):
 
     option = data
     if start_dir.endswith('.zip'):
-        # Если текущая директория - это ZIP файл, обрабатываем его содержимое
         with zipfile.ZipFile(start_dir, 'r') as z:
             items = z.namelist()
             if option == "-d":
-                # Только директории
                 dirs = [item for item in items if item.endswith('/')]
                 for dir in dirs:
                     console.text_list.append(f"-> {dir}")
             elif option == "-a":
-                # Все файлы и директории
                 for item in items:
                     console.text_list.append(f"-> {item}")
             elif option == "-f":
-                # Строим дерево файлов
                 for item in items:
                     console.text_list.append(f"-> {item}")
     else:
-        # Стандартная логика для обычных директорий
         if option == "-d":
             files_list.clear()
             items = os.listdir(start_dir)
@@ -231,7 +229,6 @@ def tree(data):
             files_list.clear()
             list_files_in_directory(start_dir)
 
-# List files and directories, including inside zip files
 def ls(data, find_bool):
     global start_dir
     if find_bool:
@@ -337,13 +334,16 @@ class Emulator():
         input_box.input_history.append(command)
         input_box.history_step = 0
 
-if one=="ls":
-    ls(data=start_dir, find_bool=False)
-if two=="cd":
-    cd(data=start_dir)
-if three=="tree":
-    tree(data="tree -a")
-if four=="uniq":
-    uniq(data="uniq -u common.txt uncommon.txt")
+try:
+    if one=="ls":
+        ls(data=start_dir, find_bool=False)
+    if two=="cd":
+        cd(data=start_dir)
+    if three=="tree":
+        tree(data="tree -a")
+    if four=="uniq":
+        uniq(data="uniq -u common.txt uncommon.txt")
+except:
+    console.text_list.append("Error with reading flags!")
 
 hello_message()
