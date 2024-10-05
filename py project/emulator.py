@@ -15,7 +15,7 @@ import zipfile
 import configparser
 
 #если это понадобиться, значит либо где-то потерялся ini файл, либо настал конец света
-start_dir = '.'
+start_dir = 'C:/Users/3bepu/OneDrive/Документы/GitHub/gui_shell_emulator/py project/arch229.zip'
 username = getpass.getuser()
 arch_dir = './arch_dir.tar'
 
