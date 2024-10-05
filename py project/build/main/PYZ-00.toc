@@ -1,4 +1,4 @@
-('C:\\Users\\Administrator\\Documents\\GitHub\\gui_shell_emulator\\py '
+('C:\\Users\\Administrator\\Documents\\GitHub\\config_mirea_dz_14\\py '
  'project\\build\\main\\PYZ-00.pyz',
  [('__future__',
    'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\__future__.py',
@@ -64,7 +64,7 @@
    'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\configparser.py',
    'PYMODULE'),
   ('console',
-   'C:\\Users\\Administrator\\Documents\\GitHub\\gui_shell_emulator\\py '
+   'C:\\Users\\Administrator\\Documents\\GitHub\\config_mirea_dz_14\\py '
    'project\\console.py',
    'PYMODULE'),
   ('contextlib',
@@ -194,7 +194,7 @@
    'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\email\\utils.py',
    'PYMODULE'),
   ('emulator',
-   'C:\\Users\\Administrator\\Documents\\GitHub\\gui_shell_emulator\\py '
+   'C:\\Users\\Administrator\\Documents\\GitHub\\config_mirea_dz_14\\py '
    'project\\emulator.py',
    'PYMODULE'),
   ('fnmatch',
@@ -312,7 +312,7 @@
    'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\importlib\\util.py',
    'PYMODULE'),
   ('input_box',
-   'C:\\Users\\Administrator\\Documents\\GitHub\\gui_shell_emulator\\py '
+   'C:\\Users\\Administrator\\Documents\\GitHub\\config_mirea_dz_14\\py '
    'project\\input_box.py',
    'PYMODULE'),
   ('inspect',
@@ -328,7 +328,7 @@
    'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\lzma.py',
    'PYMODULE'),
   ('main',
-   'C:\\Users\\Administrator\\Documents\\GitHub\\gui_shell_emulator\\py '
+   'C:\\Users\\Administrator\\Documents\\GitHub\\config_mirea_dz_14\\py '
    'project\\main.py',
    'PYMODULE'),
   ('mimetypes',

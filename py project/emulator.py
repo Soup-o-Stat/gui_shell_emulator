@@ -12,11 +12,19 @@ import subprocess
 from collections import Counter
 import configparser
 import zipfile
+import configparser
 
 #если это понадобиться, значит либо где-то потерялся ini файл, либо настал конец света
 start_dir = '.'
 username = getpass.getuser()
 arch_dir = './arch_dir.tar'
+
+script, one, two, three, four=sys.argv
+print("Этот скрипт называется: ", script)
+print(one)
+print(two)
+print(three)
+print(four)
 
 #чтение ини файла
 def read_ini_file(filename):
@@ -74,6 +82,7 @@ def open_game():
 def clear():
     console.text_list.clear()
 
+
 def uniq(data):
     data_sorted = False
     for i in range(len(data)):
@@ -87,29 +96,48 @@ def uniq(data):
     param1 = arguments[0]
     param2 = arguments[1]
     param3 = arguments[2]
-    if not os.path.exists(param2):
-        console.text_list.append(f"Error! File {param2} does not exist")
-        return
-    if param1 == "-u":
-        print("-u")
-        with open(param2, encoding='utf-8') as fin:
-            lines = [line.strip() for line in fin]
-        line_counts = Counter(lines)
-        with open(param3, 'w', encoding='utf-8') as papers_please:
-            for line in lines:
-                if line_counts[line] == 1:
-                    papers_please.write(line + '\n')
-                    data_sorted = True
-    elif param1 == "-d":
-        with open(param2, encoding='utf-8') as fin, open(param3, 'w', encoding='utf-8') as papers_please:
-            seen = set()
-            for line in fin:
-                if line.strip() not in seen:
-                    seen.add(line.strip())
-                    papers_please.write(line)
-                    data_sorted = True
+
+    # Если файл находится в zip архиве
+    if start_dir.endswith('.zip'):
+        with zipfile.ZipFile(start_dir, 'r') as z:
+            if param2 in z.namelist():
+                with z.open(param2) as fin:
+                    lines = [line.decode('utf-8').strip() for line in fin]
+                line_counts = Counter(lines)
+                with open(param3, 'w', encoding='utf-8') as papers_please:
+                    for line in lines:
+                        if param1 == "-u" and line_counts[line] == 1:
+                            papers_please.write(line + '\n')
+                        elif param1 == "-d" and line_counts[line] > 1:
+                            papers_please.write(line + '\n')
+                data_sorted = True
+            else:
+                console.text_list.append(f"Error! File {param2} does not exist in archive.")
+                return
     else:
-        console.text_list.append(f"Error! {param1} is not a valid option")
+        if not os.path.exists(param2):
+            console.text_list.append(f"Error! File {param2} does not exist")
+            return
+        if param1 == "-u":
+            with open(param2, encoding='utf-8') as fin:
+                lines = [line.strip() for line in fin]
+            line_counts = Counter(lines)
+            with open(param3, 'w', encoding='utf-8') as papers_please:
+                for line in lines:
+                    if line_counts[line] == 1:
+                        papers_please.write(line + '\n')
+            data_sorted = True
+        elif param1 == "-d":
+            with open(param2, encoding='utf-8') as fin, open(param3, 'w', encoding='utf-8') as papers_please:
+                seen = set()
+                for line in fin:
+                    if line.strip() not in seen:
+                        seen.add(line.strip())
+                        papers_please.write(line)
+            data_sorted = True
+        else:
+            console.text_list.append(f"Error! {param1} is not a valid option")
+
     if data_sorted:
         os.startfile(param3)
         console.text_list.append(f"Done! Trying to open {param3}")
@@ -158,30 +186,50 @@ def tree(data):
     if not option_found:
         console.text_list.append("Error! No options")
         return
+
     option = data
-    if option == "-d":
-        files_list.clear()
-        items = os.listdir(start_dir)
-        for item in items:
-            path = os.path.join(start_dir, item)
-            if os.path.isdir(path):
-                files_list.append(path)
-        for i in range(len(files_list)):
-            console.text_list.append(f"-> {files_list[i]}")
-    elif option == "-a":
-        files_list.clear()
-        items = os.listdir(start_dir)
-        for item in items:
-            path = os.path.join(start_dir, item)
-            if os.path.isfile(path):
-                files_list.append(path)
-            elif os.path.isdir(path):
-                files_list.append(path)
-        for i in range(len(files_list)):
-            console.text_list.append(f"-> {files_list[i]}")
-    elif option == "-f":
-        files_list.clear()
-        list_files_in_directory(start_dir)
+    if start_dir.endswith('.zip'):
+        # Если текущая директория - это ZIP файл, обрабатываем его содержимое
+        with zipfile.ZipFile(start_dir, 'r') as z:
+            items = z.namelist()
+            if option == "-d":
+                # Только директории
+                dirs = [item for item in items if item.endswith('/')]
+                for dir in dirs:
+                    console.text_list.append(f"-> {dir}")
+            elif option == "-a":
+                # Все файлы и директории
+                for item in items:
+                    console.text_list.append(f"-> {item}")
+            elif option == "-f":
+                # Строим дерево файлов
+                for item in items:
+                    console.text_list.append(f"-> {item}")
+    else:
+        # Стандартная логика для обычных директорий
+        if option == "-d":
+            files_list.clear()
+            items = os.listdir(start_dir)
+            for item in items:
+                path = os.path.join(start_dir, item)
+                if os.path.isdir(path):
+                    files_list.append(path)
+            for i in range(len(files_list)):
+                console.text_list.append(f"-> {files_list[i]}")
+        elif option == "-a":
+            files_list.clear()
+            items = os.listdir(start_dir)
+            for item in items:
+                path = os.path.join(start_dir, item)
+                if os.path.isfile(path):
+                    files_list.append(path)
+                elif os.path.isdir(path):
+                    files_list.append(path)
+            for i in range(len(files_list)):
+                console.text_list.append(f"-> {files_list[i]}")
+        elif option == "-f":
+            files_list.clear()
+            list_files_in_directory(start_dir)
 
 # List files and directories, including inside zip files
 def ls(data, find_bool):
@@ -271,7 +319,7 @@ class Emulator():
         elif command[:3] == "ls ":
             ls(data=command, find_bool=True)
         elif command == "cd":
-            cd(data='.')
+            cd(data=start_dir)
         elif command[:3] == "cd ":
             cd(data=command)
         elif command[:5] == "uniq ":
@@ -288,5 +336,14 @@ class Emulator():
             error_command(command=command)
         input_box.input_history.append(command)
         input_box.history_step = 0
+
+if one=="ls":
+    ls(data=start_dir, find_bool=False)
+if two=="cd":
+    cd(data=start_dir)
+if three=="tree":
+    tree(data="tree -a")
+if four=="uniq":
+    uniq(data="uniq -u common.txt uncommon.txt")
 
 hello_message()

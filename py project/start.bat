@@ -1,1 +1,1 @@
-Shell_Emulator.exe
+main.exe ls cd tree uniq
