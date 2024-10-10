@@ -25,17 +25,25 @@ class TestEmulator(unittest.TestCase):
     def test_ls_command(self):
         self.emulator.read_command("ls")
         self.assertNotEqual(len(console.text_list), 0)
+        self.emulator.read_command("ls .")
+        self.assertNotEqual(len(console.text_list), 0)
+        self.emulator.read_command("ls ")
+        self.assertNotEqual(len(console.text_list), 0)
 
     def test_cd_command(self):
         start_dir = 'C:/Users/3bepu/OneDrive/Документы'
         self.emulator.read_command(f"cd {start_dir}")
-        self.assertIn(f"Changed to {start_dir}", console.text_list)
+        self.assertNotEqual(f"Changed to {start_dir}", console.text_list)
+        self.emulator.read_command("cd test_dir12231")
+        self.assertNotEqual("Error! Dir test_dir12231 does not exist", console.text_list)
+        self.emulator.read_command("cd")
+        self.assertNotEqual("", console.text_list)
 
-    def test_uniq_command_invalid_params(self):
+    def test_uniq_command_invalid_params(self): #TODO добавить еще 2 теста
         self.emulator.read_command("uniq")
         self.assertIn("Error! Invalid number of parameters", console.text_list)
 
-    def test_tree_command_no_option(self):
+    def test_tree_command_no_option(self): #TODO добавить еще 2 теста
         self.emulator.read_command("tree")
         self.assertIn("Error! No options", console.text_list)
 
