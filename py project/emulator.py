@@ -2,8 +2,7 @@
 import time
 import pygame
 import console
-import main
-import input_box
+# import input_box
 import os
 import sys
 import webbrowser
@@ -76,7 +75,6 @@ def print_help():
 #о программе
 def print_about():
     console.text_list.append("This Shell Emulator has been created by Soup-o-Stat")
-    console.text_list.append(f"Version: {main.ver}")
 
 #хз, зачем я это добавил, но пусть будет
 def open_game():
@@ -341,8 +339,9 @@ class Emulator():
             start_test()
         else:
             error_command(command=command)
-        input_box.input_history.append(command)
-        input_box.history_step = 0
+        print(console.text_list)
+        # input_box.input_history.append(command)
+        # input_box.history_step = 0
 
 #подгрузка флажков
 try:
