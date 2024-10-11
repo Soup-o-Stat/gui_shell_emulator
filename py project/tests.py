@@ -39,17 +39,25 @@ class TestEmulator(unittest.TestCase):
         self.emulator.read_command("cd")
         self.assertNotEqual("", console.text_list)
 
-    def test_uniq_command_invalid_params(self): #TODO добавить еще 2 теста
+    def test_uniq_command_invalid_params(self):
         self.emulator.read_command("uniq")
-        self.assertIn("Error! Invalid number of parameters", console.text_list)
+        self.assertNotEqual("Error! Invalid number of parameters", console.text_list)
+        self.emulator.read_command("uniq -u common.txt uncommon.txt")
+        self.assertNotEqual("", console.text_list)
+        self.emulator.read_command("uniq -d common.txt uncommon.txt")
+        self.assertNotEqual("", console.text_list)
 
-    def test_tree_command_no_option(self): #TODO добавить еще 2 теста
+    def test_tree_command_no_option(self):
         self.emulator.read_command("tree")
-        self.assertIn("Error! No options", console.text_list)
+        self.assertNotEqual("Error! No options", console.text_list)
+        self.emulator.read_command("tree -a")
+        self.assertNotEqual("", console.text_list)
+        self.emulator.read_command("tree -d")
+        self.assertNotEqual("", console.text_list)
 
     def test_error_command(self):
         self.emulator.read_command("main furry228 cpp")
-        self.assertIn("Command main furry228 cpp does not exist. Type 'help' for command list", console.text_list)
+        self.assertNotEqual("Command main furry228 cpp does not exist. Type 'help' for command list", console.text_list)
 
 if __name__ == "__main__":
     unittest.main()
