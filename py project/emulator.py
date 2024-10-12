@@ -62,15 +62,21 @@ def exit_programm():
 
 #я не умею писать help)))
 def print_help():
-    console.text_list.append("List of commands:")
-    console.text_list.append(" * help: list of commands")
-    console.text_list.append(" * clear: clear console")
-    console.text_list.append(" * about: about this program")
-    console.text_list.append(" * exit: exit")
-    console.text_list.append(" * ls: print all files and dirs in this directory")
-    console.text_list.append(" * uniq: something with files idk))")
-    console.text_list.append(" * tree: file tree")
-    console.text_list.append(" * cd: change directory")
+    console.text_list.append("List of available commands:")
+    console.text_list.append(" * help: Displays this list of commands")
+    console.text_list.append(" * clear: Clears the console output")
+    console.text_list.append(" * about: Shows information about this program")
+    console.text_list.append(" * exit: Exits the emulator")
+    console.text_list.append(" * ls [directory]: ")
+    console.text_list.append("   Lists all files and directories in the current or specified directory")
+    console.text_list.append(" * uniq -u/-d input.txt output.txt:")
+    console.text_list.append("   Finds unique (-u) or duplicate (-d) lines in a file")
+    console.text_list.append(" * tree -d/-a/-f: ")
+    console.text_list.append("   Displays a directory tree, showing directories (-d), ")
+    console.text_list.append("   all contents (-a), or files (-f)")
+    console.text_list.append(" * cd [directory]: Changes the current working directory")
+    console.text_list.append(" * open_game: Opens a game via VK Play")
+
 
 #о программе
 def print_about():
@@ -269,40 +275,6 @@ def hello_message():
     console.text_list.append("==========================================================")
     console.text_list.append("")
 
-#тесты
-def start_test():
-    clear()
-    console.text_list.append("Let's start tests")
-    Emulator.read_command(Emulator, "help")
-    Emulator.read_command(Emulator, "help ")
-    Emulator.read_command(Emulator, "help 12312")
-
-    Emulator.read_command(Emulator, "about")
-    Emulator.read_command(Emulator, "about ")
-    Emulator.read_command(Emulator, "about 12312")
-
-    Emulator.read_command(Emulator, "ls")
-    Emulator.read_command(Emulator, "ls ")
-    Emulator.read_command(Emulator, "ls /")
-
-    Emulator.read_command(Emulator, "cd")
-    Emulator.read_command(Emulator, "ls")
-    Emulator.read_command(Emulator, "cd /")
-    Emulator.read_command(Emulator, "ls")
-    Emulator.read_command(Emulator, "cd /herobotina228")
-    Emulator.read_command(Emulator, "ls .")
-    Emulator.read_command(Emulator, "cd")
-
-    Emulator.read_command(Emulator, "uniq")
-    Emulator.read_command(Emulator, "uniq -u name.txt govno2.txt")
-    Emulator.read_command(Emulator, "uniq -d name.txt govno2.txt")
-    Emulator.read_command(Emulator, "uniq chavo.txt")
-
-    Emulator.read_command(Emulator, "tree")
-    Emulator.read_command(Emulator, "tree -a")
-    Emulator.read_command(Emulator, "tree -d")
-    Emulator.read_command(Emulator, "tree -f")
-
 #класс эмулятора
 class Emulator():
     def __init__(self):
@@ -335,8 +307,6 @@ class Emulator():
             tree(data=command)
         elif command[:5] == "tree":
             console.text_list.append("Error! No options")
-        elif command == "start_test":
-            start_test()
         else:
             error_command(command=command)
         print(console.text_list)
